@@ -1,0 +1,17 @@
+com.snapcal
+color black
+color white
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+id appLogoOverlay
+id myWebView
+layout activity_main
+mipmap ic_launcher
+mipmap ic_launcher_foreground
+mipmap ic_launcher_round
+string app_name
+style Base_Theme_SnapCal
+style Theme_SnapCal_Main
+style Theme_SnapCal_Splash
+xml backup_rules
+xml data_extraction_rules

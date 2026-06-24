@@ -1,0 +1,155 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    xmlns:tools="http://schemas.tools.com/apk/res/tools"
+4    package="com.snapcal"
+5    android:versionCode="1"
+6    android:versionName="1.0" >
+7
+8    <uses-sdk
+8-->INJECTED
+9        android:minSdkVersion="24"
+9-->INJECTED
+10        android:targetSdkVersion="36" />
+10-->INJECTED
+11
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:5:5-67
+12-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:5:22-64
+13    <uses-permission android:name="android.permission.CAMERA" />
+13-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:6:5-65
+13-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:6:22-62
+14    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+14-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:7:5-76
+14-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:7:22-74
+15
+16    <uses-feature
+16-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:9:5-85
+17        android:name="android.hardware.camera"
+17-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:9:19-57
+18        android:required="false" />
+18-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:9:58-82
+19
+20    <permission
+20-->[androidx.core:core:1.18.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c00de11e20a76202caacf4d34cbaa457\workspace\transformed\core-1.18.0\AndroidManifest.xml:22:5-24:47
+21        android:name="com.snapcal.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+21-->[androidx.core:core:1.18.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c00de11e20a76202caacf4d34cbaa457\workspace\transformed\core-1.18.0\AndroidManifest.xml:23:9-81
+22        android:protectionLevel="signature" />
+22-->[androidx.core:core:1.18.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c00de11e20a76202caacf4d34cbaa457\workspace\transformed\core-1.18.0\AndroidManifest.xml:24:9-44
+23
+24    <uses-permission android:name="com.snapcal.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+24-->[androidx.core:core:1.18.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c00de11e20a76202caacf4d34cbaa457\workspace\transformed\core-1.18.0\AndroidManifest.xml:26:5-97
+24-->[androidx.core:core:1.18.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c00de11e20a76202caacf4d34cbaa457\workspace\transformed\core-1.18.0\AndroidManifest.xml:26:22-94
+25
+26    <application
+26-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:11:5-30:19
+27        android:allowBackup="true"
+27-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:12:9-35
+28        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+28-->[androidx.core:core:1.18.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c00de11e20a76202caacf4d34cbaa457\workspace\transformed\core-1.18.0\AndroidManifest.xml:28:18-86
+29        android:dataExtractionRules="@xml/data_extraction_rules"
+29-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:13:9-65
+30        android:debuggable="true"
+31        android:extractNativeLibs="false"
+31-->INJECTED
+32        android:fullBackupContent="@xml/backup_rules"
+32-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:14:9-54
+33        android:icon="@mipmap/ic_launcher"
+33-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:15:9-43
+34        android:label="SnapCal"
+34-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:16:9-32
+35        android:roundIcon="@mipmap/ic_launcher_round"
+35-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:17:9-54
+36        android:supportsRtl="true"
+36-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:18:9-35
+37        android:theme="@style/Theme.SnapCal.Main"
+37-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:19:9-50
+38        tools:targetApi="31" >
+38-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:20:9-29
+39        <activity
+39-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:22:9-29:20
+40            android:name="com.snapcal.MainActivity"
+40-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:23:13-41
+41            android:exported="true"
+41-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:24:13-36
+42            android:theme="@style/Theme.SnapCal.Splash" >
+42-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:25:13-56
+43            <intent-filter>
+43-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:25:58-28:25
+44                <action android:name="android.intent.action.MAIN" />
+44-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:26:13-65
+44-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:26:21-62
+45
+46                <category android:name="android.intent.category.LAUNCHER" />
+46-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:27:13-73
+46-->C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\AndroidManifest.xml:27:23-70
+47            </intent-filter>
+48        </activity>
+49
+50        <provider
+50-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\2483921e3e64c3f66ba149794098be29\workspace\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+51            android:name="androidx.startup.InitializationProvider"
+51-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\2483921e3e64c3f66ba149794098be29\workspace\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
+52            android:authorities="com.snapcal.androidx-startup"
+52-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\2483921e3e64c3f66ba149794098be29\workspace\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
+53            android:exported="false" >
+53-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\2483921e3e64c3f66ba149794098be29\workspace\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
+54            <meta-data
+54-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\2483921e3e64c3f66ba149794098be29\workspace\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+55                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+55-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\2483921e3e64c3f66ba149794098be29\workspace\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+56                android:value="androidx.startup" />
+56-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\2483921e3e64c3f66ba149794098be29\workspace\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+57            <meta-data
+57-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\092243a722e9f40806e6e1f1eee9854b\workspace\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:29:13-31:52
+58                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+58-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\092243a722e9f40806e6e1f1eee9854b\workspace\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:30:17-78
+59                android:value="androidx.startup" />
+59-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\092243a722e9f40806e6e1f1eee9854b\workspace\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:31:17-49
+60            <meta-data
+60-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
+61                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+61-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
+62                android:value="androidx.startup" />
+62-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
+63        </provider>
+64
+65        <receiver
+65-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
+66            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+66-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
+67            android:directBootAware="false"
+67-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
+68            android:enabled="true"
+68-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
+69            android:exported="true"
+69-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
+70            android:permission="android.permission.DUMP" >
+70-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
+71            <intent-filter>
+71-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
+72                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+72-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
+72-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
+73            </intent-filter>
+74            <intent-filter>
+74-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
+75                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+75-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
+75-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
+76            </intent-filter>
+77            <intent-filter>
+77-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
+78                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+78-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
+78-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
+79            </intent-filter>
+80            <intent-filter>
+80-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
+81                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+81-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
+81-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Shaurya\.gradle\caches\9.3.1\transforms\c8608f6b1cd4c4e308e1a19dfbdd0f0d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
+82            </intent-filter>
+83        </receiver>
+84    </application>
+85
+86</manifest>

@@ -1,0 +1,7 @@
+com.snapcal.app-pngs-0 C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\build\generated\res\pngs\debug
+com.snapcal.app-updated_navigation_xml-1 C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\build\generated\updated_navigation_xml\debug
+com.snapcal.app-packageDebugResources-2 C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.snapcal.app-packageDebugResources-3 C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.snapcal.app-debug-4 C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\build\intermediates\merged_res\debug\mergeDebugResources
+com.snapcal.app-debug-5 C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\debug\res
+com.snapcal.app-main-6 C:\Users\Shaurya\AndroidStudioProjects\SnapCal\app\src\main\res

@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.snapcal.app-mergeDebugResources-34:/values-v16/values-v16.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Shaurya\\.gradle\\caches\\9.3.1\\transforms\\fbcd35bfbcbd8cbe101ee6d68a2b559c\\workspace\\transformed\\appcompat-1.7.1\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    }
+                }
+            ]
+        }
+    ]
+}

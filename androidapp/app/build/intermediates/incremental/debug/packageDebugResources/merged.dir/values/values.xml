@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="app_name">SnapCal</string>
+    <style name="Theme.SnapCal.Main" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">#F4EBE8</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <item name="android:navigationBarColor">#F4EBE8</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+    <style name="Theme.SnapCal.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#F4EBE8</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="postSplashScreenTheme">@style/Theme.SnapCal.Main</item>
+    </style>
+</resources>
