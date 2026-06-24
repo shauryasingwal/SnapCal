@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#A5668B">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="SnapCal">
+  <meta name="description" content="Track your daily nutrition effortlessly with SnapCal.">
+  <title>SnapCal – Food Tracker</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════
+       ONBOARDING OVERLAY
+       Shown on first launch. Hidden by onboarding.js on completion.
+  ═══════════════════════════════════════════════ -->
+  <div id="onboarding" role="dialog" aria-modal="true" aria-labelledby="ob-heading">
+
+    <div class="ob-progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="5" aria-label="Setup progress">
+      <div id="ob-progress-fill" class="ob-progress-fill"></div>
+    </div>
+
+    <!-- Step 1: Welcome & Name -->
+    <div id="ob-step-1" class="ob-step ob-step--active" aria-labelledby="ob-s1-title">
+      <div class="ob-icon" aria-hidden="true">🥗</div>
+      <h1 id="ob-s1-title" class="ob-title" id="ob-heading">Welcome to SnapCal</h1>
+      <p class="ob-subtitle">Your personal nutrition companion. Let's set up your profile to calculate your perfect daily targets.</p>
+      <div class="form-group">
+        <label class="form-label" for="ob-name">What's your name?</label>
+        <input type="text" id="ob-name" class="form-input" placeholder="e.g. Sarah" autocomplete="given-name" autocapitalize="words">
+      </div>
+    </div>
+
+    <!-- Step 2: Age & Gender -->
+    <div id="ob-step-2" class="ob-step" aria-labelledby="ob-s2-title">
+      <div class="ob-icon" aria-hidden="true">👤</div>
+      <h1 id="ob-s2-title" class="ob-title">About You</h1>
+      <p class="ob-subtitle">Helps us calculate your Basal Metabolic Rate (BMR) accurately.</p>
+      <div class="form-group">
+        <label class="form-label" for="ob-age">Age</label>
+        <input type="number" id="ob-age" class="form-input" placeholder="25" min="10" max="100" inputmode="numeric">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Gender</label>
+        <div class="choice-grid choice-grid--3" role="radiogroup" aria-label="Select gender">
+          <button type="button" class="choice-card" data-group="gender" data-value="male" role="radio" aria-checked="false">
+            <span class="choice-icon" aria-hidden="true">♂️</span>
+            <span class="choice-label">Male</span>
+          </button>
+          <button type="button" class="choice-card" data-group="gender" data-value="female" role="radio" aria-checked="false">
+            <span class="choice-icon" aria-hidden="true">♀️</span>
+            <span class="choice-label">Female</span>
+          </button>
+          <button type="button" class="choice-card" data-group="gender" data-value="other" role="radio" aria-checked="false">
+            <span class="choice-icon" aria-hidden="true">⚧️</span>
+            <span class="choice-label">Other</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Height & Weight -->
+    <div id="ob-step-3" class="ob-step" aria-labelledby="ob-s3-title">
+      <div class="ob-icon" aria-hidden="true">📏</div>
+      <h1 id="ob-s3-title" class="ob-title">Body Metrics</h1>
+      <p class="ob-subtitle">Used to calculate your Basal Metabolic Rate (BMR) and daily calorie goal.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="ob-height">Height (cm)</label>
+          <input type="number" id="ob-height" class="form-input" placeholder="170" min="100" max="250" inputmode="numeric">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="ob-weight">Weight (kg)</label>
+          <input type="number" id="ob-weight" class="form-input" placeholder="70" min="30" max="300" inputmode="decimal">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4: Activity Level -->
+    <div id="ob-step-4" class="ob-step" aria-labelledby="ob-s4-title">
+      <div class="ob-icon" aria-hidden="true">⚡</div>
+      <h1 id="ob-s4-title" class="ob-title">Activity Level</h1>
+      <p class="ob-subtitle">How active are you on a typical week?</p>
+      <div class="choice-grid choice-grid--1" role="radiogroup" aria-label="Select activity level">
+        <button type="button" class="choice-card choice-card--wide" data-group="activity" data-value="sedentary" role="radio" aria-checked="false">
+          <span class="choice-icon" aria-hidden="true">🪑</span>
+          <div class="choice-text">
+            <span class="choice-label">Sedentary</span>
+            <span class="choice-desc">Little or no exercise</span>
+          </div>
+        </button>
+        <button type="button" class="choice-card choice-card--wide" data-group="activity" data-value="lightly" role="radio" aria-checked="false">
+          <span class="choice-icon" aria-hidden="true">🚶</span>
+          <div class="choice-text">
+            <span class="choice-label">Lightly Active</span>
+            <span class="choice-desc">Light exercise 1–3 days/week</span>
+          </div>
+        </button>
+        <button type="button" class="choice-card choice-card--wide" data-group="activity" data-value="moderately" role="radio" aria-checked="false">
+          <span class="choice-icon" aria-hidden="true">🏃</span>
+          <div class="choice-text">
+            <span class="choice-label">Moderately Active</span>
+            <span class="choice-desc">Moderate exercise 3–5 days/week</span>
+          </div>
+        </button>
+        <button type="button" class="choice-card choice-card--wide" data-group="activity" data-value="very" role="radio" aria-checked="false">
+          <span class="choice-icon" aria-hidden="true">🏋️</span>
+          <div class="choice-text">
+            <span class="choice-label">Very Active</span>
+            <span class="choice-desc">Hard exercise 6–7 days/week</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 5: Goal -->
+    <div id="ob-step-5" class="ob-step" aria-labelledby="ob-s5-title">
+      <div class="ob-icon" aria-hidden="true">🎯</div>
+      <h1 id="ob-s5-title" class="ob-title">Your Goal</h1>
+      <p class="ob-subtitle">We'll adjust your daily calorie and macro targets accordingly.</p>
+      <div class="choice-grid choice-grid--1" role="radiogroup" aria-label="Select goal">
+        <button type="button" class="choice-card choice-card--wide" data-group="goal" data-value="lose" role="radio" aria-checked="false">
+          <span class="choice-icon" aria-hidden="true">📉</span>
+          <div class="choice-text">
+            <span class="choice-label">Lose Weight</span>
+            <span class="choice-desc">Calorie deficit to shed body fat</span>
+          </div>
+        </button>
+        <button type="button" class="choice-card choice-card--wide" data-group="goal" data-value="maintain" role="radio" aria-checked="false">
+          <span class="choice-icon" aria-hidden="true">⚖️</span>
+          <div class="choice-text">
+            <span class="choice-label">Maintain Weight</span>
+            <span class="choice-desc">Stay at your current weight</span>
+          </div>
+        </button>
+        <button type="button" class="choice-card choice-card--wide" data-group="goal" data-value="gain" role="radio" aria-checked="false">
+          <span class="choice-icon" aria-hidden="true">📈</span>
+          <div class="choice-text">
+            <span class="choice-label">Gain Weight</span>
+            <span class="choice-desc">Calorie surplus to build muscle</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 6: Summary -->
+    <div id="ob-step-6" class="ob-step" aria-labelledby="ob-s6-title">
+      <div class="ob-icon ob-icon--celebrate" aria-hidden="true">🎉</div>
+      <h1 id="ob-s6-title" class="ob-title">You're all set, <span id="ob-summary-name">there</span>!</h1>
+      <p class="ob-subtitle">Here are your personalised daily nutrition targets based on your profile.</p>
+      <div class="ob-summary-card">
+        <div class="ob-summary-row">
+          <span class="ob-summary-label">Daily Calories</span>
+          <span class="ob-summary-val ob-summary-val--primary" id="ob-calc-calories">—</span>
+        </div>
+        <div class="ob-summary-row">
+          <span class="ob-summary-label">Protein</span>
+          <span class="ob-summary-val" id="ob-calc-protein">—</span>
+        </div>
+        <div class="ob-summary-row">
+          <span class="ob-summary-label">Carbohydrates</span>
+          <span class="ob-summary-val" id="ob-calc-carbs">—</span>
+        </div>
+        <div class="ob-summary-row ob-summary-row--last">
+          <span class="ob-summary-label">Fat</span>
+          <span class="ob-summary-val" id="ob-calc-fat">—</span>
+        </div>
+      </div>
+      <p class="ob-note">These targets recalculate automatically if you update your profile later.</p>
+    </div>
+
+    <!-- Bottom nav buttons (persist across all steps) -->
+    <div class="ob-nav">
+      <button id="ob-back-btn" type="button" class="ob-btn ob-btn--secondary" aria-label="Go back">Back</button>
+      <button id="ob-next-btn" type="button" class="ob-btn ob-btn--primary">Continue</button>
+    </div>
+
+  </div>
+  <!-- /#onboarding -->
+
+
+  <!-- ═══════════════════════════════════════════════
+       MAIN APP SHELL
+       Hidden on first launch; shown by onboarding.js on completion.
+  ═══════════════════════════════════════════════ -->
+  <div id="app" class="app-shell" hidden>
+
+    <!-- Scrollable screen area -->
+    <main id="screen-canvas" class="screen-canvas" role="main">
+
+      <!-- ─────────────────────────────────
+           SCREEN: HOME
+      ───────────────────────────────── -->
+      <section id="screen-home" class="screen screen--active" aria-label="Home – daily nutrition overview">
+
+        <header class="home-header">
+          <div class="home-greeting">
+            <p class="greeting-time" id="home-greeting-time">Good morning</p>
+            <h1 class="greeting-name" id="home-greeting-name">—</h1>
+          </div>
+          <button class="avatar-btn" id="home-avatar-btn" aria-label="Open profile">
+            <div class="avatar avatar--sm">
+              <span class="avatar-initials" id="home-avatar-initials">SC</span>
+            </div>
+          </button>
+        </header>
+
+        <!-- Calorie ring card -->
+        <div class="card calorie-ring-card" role="region" aria-label="Daily calorie progress">
+          <div class="ring-wrapper">
+            <!-- r=85 → circumference=534. JS sets stroke-dashoffset. -->
+            <svg class="ring-svg" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="ring-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#C385AB"/>
+                  <stop offset="100%" stop-color="#A5668B"/>
+                </linearGradient>
+              </defs>
+              <circle class="ring-track" cx="100" cy="100" r="85"/>
+              <circle class="ring-progress" id="cal-ring-progress"
+                cx="100" cy="100" r="85"
+                stroke="url(#ring-gradient)"
+                stroke-dasharray="534"
+                stroke-dashoffset="534"
+                transform="rotate(-90 100 100)"/>
+            </svg>
+            <div class="ring-center" aria-live="polite">
+              <span class="ring-cal-num" id="home-cal-consumed">0</span>
+              <span class="ring-cal-label">kcal eaten</span>
+            </div>
+          </div>
+
+          <div class="ring-stats" role="list">
+            <div class="ring-stat" role="listitem">
+              <span class="ring-stat-val" id="home-cal-remaining">0</span>
+              <span class="ring-stat-label">Remaining</span>
+            </div>
+            <div class="ring-divider" aria-hidden="true"></div>
+            <div class="ring-stat" role="listitem">
+              <span class="ring-stat-val ring-stat-val--accent" id="home-cal-goal">0</span>
+              <span class="ring-stat-label">Goal</span>
+            </div>
+            <div class="ring-divider" aria-hidden="true"></div>
+            <div class="ring-stat" role="listitem">
+              <span class="ring-stat-val" id="home-cal-over">0</span>
+              <span class="ring-stat-label">Over</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Macros card -->
+        <div class="card" role="region" aria-label="Macro nutrition progress">
+          <h2 class="card-title">Today's Macros</h2>
+
+          <div class="macro-row">
+            <div class="macro-header">
+              <span class="macro-name">Protein</span>
+              <span class="macro-amount" id="home-macro-protein-text">0g / 0g</span>
+            </div>
+            <div class="progress-track" role="progressbar" aria-label="Protein progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-fill progress-fill--protein" id="home-macro-protein-bar"></div>
+            </div>
+          </div>
+
+          <div class="macro-row">
+            <div class="macro-header">
+              <span class="macro-name">Carbs</span>
+              <span class="macro-amount" id="home-macro-carbs-text">0g / 0g</span>
+            </div>
+            <div class="progress-track" role="progressbar" aria-label="Carbohydrates progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-fill progress-fill--carbs" id="home-macro-carbs-bar"></div>
+            </div>
+          </div>
+
+          <div class="macro-row macro-row--last">
+            <div class="macro-header">
+              <span class="macro-name">Fat</span>
+              <span class="macro-amount" id="home-macro-fat-text">0g / 0g</span>
+            </div>
+            <div class="progress-track" role="progressbar" aria-label="Fat progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-fill progress-fill--fat" id="home-macro-fat-bar"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Today's meals section -->
+        <div class="section-header">
+          <h2 class="section-title">Today's Meals</h2>
+          <button class="text-btn" id="home-see-all-btn">See all</button>
+        </div>
+
+        <div id="home-meals-list" role="list" aria-label="Today's meals" aria-live="polite"></div>
+
+        <div id="home-empty-state" class="empty-state" hidden>
+          <div class="empty-state-icon" aria-hidden="true">🍽️</div>
+          <h3 class="empty-state-title">No meals yet today</h3>
+          <p class="empty-state-text">Tap the camera button below to log your first meal and start tracking your nutrition.</p>
+          <button type="button" class="btn btn--primary" id="home-log-first-btn">Log a Meal</button>
+        </div>
+
+        <div class="screen-spacer" aria-hidden="true"></div>
+      </section>
+
+
+      <!-- ─────────────────────────────────
+           SCREEN: MEALS HISTORY
+      ───────────────────────────────── -->
+      <section id="screen-meals" class="screen" aria-label="Meals – nutrition history" hidden>
+
+        <header class="page-header">
+          <h1 class="page-title">Meals</h1>
+          <p class="page-subtitle">Your complete nutrition history</p>
+        </header>
+
+        <div id="meals-history-list" role="list" aria-label="Meal history" aria-live="polite"></div>
+
+        <div id="meals-empty-state" class="empty-state" hidden>
+          <div class="empty-state-icon" aria-hidden="true">📋</div>
+          <h3 class="empty-state-title">Nothing logged yet</h3>
+          <p class="empty-state-text">Your meal history will appear here once you start logging.</p>
+        </div>
+
+        <div class="screen-spacer" aria-hidden="true"></div>
+      </section>
+
+
+      <!-- ─────────────────────────────────
+           SCREEN: STATS
+      ───────────────────────────────── -->
+      <section id="screen-stats" class="screen" aria-label="Stats – analytics and trends" hidden>
+
+        <header class="page-header">
+          <h1 class="page-title">Analytics</h1>
+          <p class="page-subtitle">Your nutrition trends over time</p>
+        </header>
+
+        <!-- Period segmented control -->
+        <div class="segmented-control" role="tablist" aria-label="Time period" id="stats-period-control">
+          <button class="seg-btn seg-btn--active" role="tab" data-period="daily" aria-selected="true" aria-controls="stats-chart-panel">Daily</button>
+          <button class="seg-btn" role="tab" data-period="weekly" aria-selected="false" aria-controls="stats-chart-panel">Weekly</button>
+          <button class="seg-btn" role="tab" data-period="monthly" aria-selected="false" aria-controls="stats-chart-panel">Monthly</button>
+        </div>
+
+        <!-- Chart card -->
+        <div class="card" id="stats-chart-panel" role="tabpanel">
+          <div class="chart-header">
+            <div class="chart-headline">
+              <p class="chart-label" id="stats-headline-label">AVG. DAILY CALORIES</p>
+              <p class="chart-value" id="stats-headline-value">—</p>
+              <p class="chart-trend" id="stats-headline-trend"></p>
+            </div>
+            <div class="metric-pills" role="group" aria-label="Switch metric" id="stats-metric-pills">
+              <button class="metric-pill metric-pill--active" data-metric="calories" aria-pressed="true">Cal</button>
+              <button class="metric-pill" data-metric="protein" aria-pressed="false">Pro</button>
+              <button class="metric-pill" data-metric="carbs" aria-pressed="false">Carb</button>
+              <button class="metric-pill" data-metric="fat" aria-pressed="false">Fat</button>
+            </div>
+          </div>
+
+          <div class="chart-container" aria-hidden="true">
+            <svg id="stats-chart-svg" class="chart-svg" viewBox="0 0 340 120" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="chart-gradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="var(--color-primary)" stop-opacity="0.22"/>
+                  <stop offset="100%" stop-color="var(--color-primary)" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path id="chart-area-path" fill="url(#chart-gradient)"/>
+              <path id="chart-line-path" fill="none" stroke="var(--color-primary)" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div id="chart-empty-state" class="chart-empty" aria-live="polite">
+              <p>No data yet — start logging meals</p>
+            </div>
+          </div>
+
+          <div class="chart-x-labels" id="stats-x-labels" aria-hidden="true"></div>
+        </div>
+
+        <!-- Average macros card -->
+        <div class="card">
+          <h2 class="card-title">Average Macros</h2>
+          <div class="macro-avgs">
+            <div class="macro-avg-row">
+              <span class="macro-avg-label">Protein avg.</span>
+              <div class="macro-avg-right">
+                <span class="macro-avg-val" id="stats-avg-protein">0g</span>
+                <small class="macro-avg-trend" id="stats-trend-protein"></small>
+              </div>
+            </div>
+            <div class="macro-avg-row">
+              <span class="macro-avg-label">Carbohydrates avg.</span>
+              <div class="macro-avg-right">
+                <span class="macro-avg-val" id="stats-avg-carbs">0g</span>
+                <small class="macro-avg-trend" id="stats-trend-carbs"></small>
+              </div>
+            </div>
+            <div class="macro-avg-row macro-avg-row--last">
+              <span class="macro-avg-label">Fat avg.</span>
+              <div class="macro-avg-right">
+                <span class="macro-avg-val" id="stats-avg-fat">0g</span>
+                <small class="macro-avg-trend" id="stats-trend-fat"></small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Streak card -->
+        <div class="card card--accent" role="region" aria-label="Logging streak">
+          <div class="streak-content">
+            <span class="streak-icon" aria-hidden="true">🔥</span>
+            <div class="streak-text">
+              <h3 class="streak-title" id="stats-streak-title">0 Day Streak</h3>
+              <p class="streak-desc">Log meals daily to keep your streak alive</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="screen-spacer" aria-hidden="true"></div>
+      </section>
+
+
+      <!-- ─────────────────────────────────
+           SCREEN: PROFILE / YOU
+      ───────────────────────────────── -->
+      <section id="screen-profile" class="screen" aria-label="Profile – details and settings" hidden>
+
+        <header class="page-header">
+          <h1 class="page-title">Profile</h1>
+          <p class="page-subtitle">Your details, goals and settings</p>
+        </header>
+
+        <!-- Hero card -->
+        <div class="card profile-hero-card">
+          <div class="profile-hero">
+            <div class="avatar avatar--lg" id="profile-avatar-large">
+              <span class="avatar-initials" id="profile-avatar-initials">SC</span>
+            </div>
+            <div class="profile-hero-info">
+              <h2 class="profile-hero-name" id="profile-display-name">—</h2>
+              <p class="profile-hero-joined" id="profile-display-joined">Member since —</p>
+              <button type="button" class="text-btn text-btn--sm" id="edit-profile-btn">Edit Profile</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Body metrics quick-look -->
+        <div class="metrics-grid" role="list" aria-label="Body metrics">
+          <div class="metric-card" role="listitem">
+            <span class="metric-icon" aria-hidden="true">🎂</span>
+            <span class="metric-value" id="profile-metric-age">—</span>
+            <span class="metric-label">Age</span>
+          </div>
+          <div class="metric-card" role="listitem">
+            <span class="metric-icon" aria-hidden="true">📏</span>
+            <span class="metric-value" id="profile-metric-height">—</span>
+            <span class="metric-label">Height</span>
+          </div>
+          <div class="metric-card" role="listitem">
+            <span class="metric-icon" aria-hidden="true">⚖️</span>
+            <span class="metric-value" id="profile-metric-weight">—</span>
+            <span class="metric-label">Weight</span>
+          </div>
+        </div>
+
+        <!-- Goals card -->
+        <div class="card" role="region" aria-label="Daily nutrition goals">
+          <h2 class="card-title">Daily Goals</h2>
+          <div class="goals-list">
+            <div class="goal-row">
+              <span class="goal-label">Calories</span>
+              <span class="goal-value goal-value--accent" id="profile-goal-calories">— kcal</span>
+            </div>
+            <div class="goal-row">
+              <span class="goal-label">Protein</span>
+              <span class="goal-value" id="profile-goal-protein">—g</span>
+            </div>
+            <div class="goal-row">
+              <span class="goal-label">Carbohydrates</span>
+              <span class="goal-value" id="profile-goal-carbs">—g</span>
+            </div>
+            <div class="goal-row goal-row--last">
+              <span class="goal-label">Fat</span>
+              <span class="goal-value" id="profile-goal-fat">—g</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings card -->
+        <div class="card" role="region" aria-label="App settings">
+          <h2 class="card-title">Settings</h2>
+          <div class="settings-list">
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-icon" aria-hidden="true">🌙</span>
+                <div class="setting-text">
+                  <h4 class="setting-name">Dark Mode</h4>
+                  <p class="setting-desc">Switch to dark appearance</p>
+                </div>
+              </div>
+              <button type="button" class="toggle" id="toggle-dark-mode"
+                role="switch" aria-checked="false" aria-label="Toggle dark mode"></button>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-icon" aria-hidden="true">📤</span>
+                <div class="setting-text">
+                  <h4 class="setting-name">Export Data</h4>
+                  <p class="setting-desc">Download your meals as JSON</p>
+                </div>
+              </div>
+              <button type="button" class="setting-chevron" id="export-data-btn" aria-label="Export data">›</button>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-icon" aria-hidden="true">📥</span>
+                <div class="setting-text">
+                  <h4 class="setting-name">Import Data</h4>
+                  <p class="setting-desc">Restore from a JSON backup</p>
+                </div>
+              </div>
+              <button type="button" class="setting-chevron" id="import-data-btn" aria-label="Import data">›</button>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-icon" aria-hidden="true">🗑️</span>
+                <div class="setting-text">
+                  <h4 class="setting-name">Clear All Meals</h4>
+                  <p class="setting-desc">Delete your entire meal history</p>
+                </div>
+              </div>
+              <button type="button" class="setting-chevron setting-chevron--danger" id="clear-meals-btn" aria-label="Clear all meals">›</button>
+            </div>
+
+            <div class="setting-row setting-row--last">
+              <div class="setting-info">
+                <span class="setting-icon" aria-hidden="true">⚠️</span>
+                <div class="setting-text">
+                  <h4 class="setting-name setting-name--danger">Reset App</h4>
+                  <p class="setting-desc">Erase all data and start fresh</p>
+                </div>
+              </div>
+              <button type="button" class="setting-chevron setting-chevron--danger" id="reset-app-btn" aria-label="Reset app">›</button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Hidden file input for JSON import -->
+        <input type="file" id="import-file-input" accept=".json" class="visually-hidden" aria-hidden="true" tabindex="-1">
+
+        <div class="screen-spacer" aria-hidden="true"></div>
+      </section>
+
+    </main>
+    <!-- /#screen-canvas -->
+
+
+    <!-- Bottom Navigation -->
+    <nav id="bottom-nav" class="bottom-nav" role="navigation" aria-label="Main navigation">
+
+      <button class="nav-item nav-item--active" data-screen="home"
+        role="tab" aria-selected="true" aria-label="Home">
+        <span class="nav-icon" aria-hidden="true">🏠</span>
+        <span class="nav-label">Home</span>
+      </button>
+
+      <button class="nav-item" data-screen="meals"
+        role="tab" aria-selected="false" aria-label="Meals">
+        <span class="nav-icon" aria-hidden="true">🍽️</span>
+        <span class="nav-label">Meals</span>
+      </button>
+
+      <!-- Floating scan FAB -->
+      <div class="fab-wrapper">
+        <button type="button" class="fab" id="fab-scan-btn" aria-label="Log a meal">
+          <svg class="fab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
+        </button>
+        <span class="fab-label" aria-hidden="true">Scan</span>
+      </div>
+
+      <button class="nav-item" data-screen="stats"
+        role="tab" aria-selected="false" aria-label="Stats">
+        <span class="nav-icon" aria-hidden="true">📊</span>
+        <span class="nav-label">Stats</span>
+      </button>
+
+      <button class="nav-item" data-screen="profile"
+        role="tab" aria-selected="false" aria-label="Profile">
+        <span class="nav-icon" aria-hidden="true">👤</span>
+        <span class="nav-label">You</span>
+      </button>
+
+    </nav>
+
+  </div>
+  <!-- /#app -->
+
+
+  <!-- ═══════════════════════════════════════════════
+       CAMERA OVERLAY  (camera.js)
+  ═══════════════════════════════════════════════ -->
+  <div id="camera-overlay" class="fullscreen-overlay" role="dialog"
+    aria-modal="true" aria-label="Camera – log a meal" hidden>
+
+    <video id="camera-stream" class="camera-video" autoplay playsinline muted></video>
+    <canvas id="camera-canvas" class="visually-hidden" aria-hidden="true"></canvas>
+
+    <div class="camera-ui">
+      <!-- Top bar -->
+      <div class="camera-top-bar">
+        <button type="button" class="icon-btn icon-btn--glass" id="close-camera-btn" aria-label="Close camera">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+        <span class="camera-title">Log Meal</span>
+        <button type="button" class="icon-btn icon-btn--glass" id="toggle-flash-btn"
+          aria-label="Toggle flash" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Viewfinder brackets -->
+      <div class="viewfinder" aria-hidden="true">
+        <div class="bracket bracket--tl"></div>
+        <div class="bracket bracket--tr"></div>
+        <div class="bracket bracket--bl"></div>
+        <div class="bracket bracket--br"></div>
+        <p class="viewfinder-hint">Position food in frame</p>
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="camera-bottom-bar">
+        <button type="button" class="gallery-btn" id="gallery-pick-btn" aria-label="Choose from gallery">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="3"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+        </button>
+        <button type="button" class="shutter-btn" id="shutter-btn" aria-label="Capture photo">
+          <div class="shutter-inner" aria-hidden="true"></div>
+        </button>
+        <button type="button" class="icon-btn icon-btn--glass" id="switch-camera-btn" aria-label="Switch camera">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="M1 4v6h6"/><path d="M23 20v-6h-6"/>
+            <path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <input type="file" id="gallery-file-input" accept="image/*" class="visually-hidden" aria-hidden="true" tabindex="-1">
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════
+       MEAL ENTRY MODAL  (meals.js)
+  ═══════════════════════════════════════════════ -->
+  <div id="meal-entry-modal" class="modal-overlay" role="dialog"
+    aria-modal="true" aria-labelledby="meal-entry-title" hidden>
+
+    <div class="modal-backdrop" id="meal-entry-backdrop" aria-hidden="true"></div>
+
+    <div class="modal-sheet" role="document">
+      <div class="modal-handle" aria-hidden="true"></div>
+
+      <div class="modal-header">
+        <h2 class="modal-title" id="meal-entry-title">Log Meal</h2>
+        <button type="button" class="icon-btn" id="close-meal-entry-btn" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Captured image preview -->
+      <div class="meal-image-wrap" id="meal-entry-image-wrap">
+        <img id="entry-meal-image" class="meal-entry-image" src="" alt="Captured food photo" hidden>
+        <div id="entry-image-placeholder" class="image-placeholder" aria-hidden="true">
+          <span class="image-placeholder-icon">📷</span>
+          <span class="image-placeholder-text">No photo attached</span>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <input type="hidden" id="entry-meal-id" value="">
+
+        <div class="form-group">
+          <label class="form-label" for="entry-name">Meal Name</label>
+          <input type="text" id="entry-name" class="form-input" placeholder="e.g. Chicken Salad" autocapitalize="words">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="entry-calories">Calories (kcal)</label>
+            <input type="number" id="entry-calories" class="form-input" placeholder="350" min="0" max="9999" inputmode="numeric">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="entry-protein">Protein (g)</label>
+            <input type="number" id="entry-protein" class="form-input" placeholder="25" min="0" max="999" inputmode="decimal">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="entry-carbs">Carbs (g)</label>
+            <input type="number" id="entry-carbs" class="form-input" placeholder="30" min="0" max="999" inputmode="decimal">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="entry-fat">Fat (g)</label>
+            <input type="number" id="entry-fat" class="form-input" placeholder="12" min="0" max="999" inputmode="decimal">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <div class="category-grid" role="radiogroup" aria-label="Meal category">
+            <button type="button" class="cat-btn" data-category="breakfast" role="radio" aria-checked="false">🌅 Breakfast</button>
+            <button type="button" class="cat-btn" data-category="lunch"     role="radio" aria-checked="false">☀️ Lunch</button>
+            <button type="button" class="cat-btn" data-category="dinner"    role="radio" aria-checked="false">🌙 Dinner</button>
+            <button type="button" class="cat-btn" data-category="snack"     role="radio" aria-checked="false">🍎 Snack</button>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn--primary btn--full" id="save-meal-btn">Save Meal</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════
+       MEAL DETAIL MODAL  (meals.js)
+  ═══════════════════════════════════════════════ -->
+  <div id="meal-detail-modal" class="modal-overlay" role="dialog"
+    aria-modal="true" aria-labelledby="detail-meal-name" hidden>
+
+    <div class="modal-backdrop" id="meal-detail-backdrop" aria-hidden="true"></div>
+
+    <div class="modal-sheet modal-sheet--tall" role="document">
+      <div class="modal-handle" aria-hidden="true"></div>
+
+      <div class="detail-image-wrap">
+        <img id="detail-meal-image" class="detail-image" src="" alt="Meal photo" hidden>
+        <div id="detail-image-placeholder" class="detail-image-placeholder" aria-hidden="true">🍽️</div>
+      </div>
+
+      <button type="button" class="icon-btn icon-btn--float" id="close-meal-detail-btn" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+
+      <div class="modal-body">
+        <div class="detail-header">
+          <h2 class="detail-meal-name" id="detail-meal-name">—</h2>
+          <div class="detail-meal-meta">
+            <span class="detail-category-badge" id="detail-meal-category">—</span>
+            <span class="detail-meal-time" id="detail-meal-time">—</span>
+          </div>
+        </div>
+
+        <div class="detail-macros-grid" role="list" aria-label="Nutrition details">
+          <div class="detail-macro" role="listitem">
+            <span class="detail-macro-val detail-macro-val--accent" id="detail-macro-calories">—</span>
+            <span class="detail-macro-label">kcal</span>
+          </div>
+          <div class="detail-macro" role="listitem">
+            <span class="detail-macro-val" id="detail-macro-protein">—</span>
+            <span class="detail-macro-label">Protein</span>
+          </div>
+          <div class="detail-macro" role="listitem">
+            <span class="detail-macro-val" id="detail-macro-carbs">—</span>
+            <span class="detail-macro-label">Carbs</span>
+          </div>
+          <div class="detail-macro" role="listitem">
+            <span class="detail-macro-val" id="detail-macro-fat">—</span>
+            <span class="detail-macro-label">Fat</span>
+          </div>
+        </div>
+
+        <div class="detail-actions">
+          <button type="button" class="btn btn--secondary btn--full" id="edit-meal-btn">Edit Meal</button>
+          <button type="button" class="btn btn--danger btn--full" id="delete-meal-btn">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════
+       EDIT PROFILE MODAL  (profile.js)
+  ═══════════════════════════════════════════════ -->
+  <div id="edit-profile-modal" class="modal-overlay" role="dialog"
+    aria-modal="true" aria-labelledby="edit-profile-title" hidden>
+
+    <div class="modal-backdrop" id="edit-profile-backdrop" aria-hidden="true"></div>
+
+    <div class="modal-sheet" role="document">
+      <div class="modal-handle" aria-hidden="true"></div>
+
+      <div class="modal-header">
+        <h2 class="modal-title" id="edit-profile-title">Edit Profile</h2>
+        <button type="button" class="icon-btn" id="close-edit-profile-btn" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="edit-name">Name</label>
+          <input type="text" id="edit-name" class="form-input" autocapitalize="words">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="edit-age">Age</label>
+            <input type="number" id="edit-age" class="form-input" min="10" max="100" inputmode="numeric">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="edit-weight">Weight (kg)</label>
+            <input type="number" id="edit-weight" class="form-input" min="30" max="300" inputmode="decimal">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="edit-height">Height (cm)</label>
+            <input type="number" id="edit-height" class="form-input" min="100" max="250" inputmode="numeric">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="edit-gender">Gender</label>
+            <select id="edit-gender" class="form-input form-select">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="edit-activity">Activity Level</label>
+          <select id="edit-activity" class="form-input form-select">
+            <option value="sedentary">Sedentary</option>
+            <option value="lightly">Lightly Active</option>
+            <option value="moderately">Moderately Active</option>
+            <option value="very">Very Active</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Goal</label>
+          <div class="choice-grid choice-grid--3" role="radiogroup" aria-label="Select goal">
+            <button type="button" class="choice-card" data-group="edit-goal" data-value="lose" role="radio" aria-checked="false">
+              <span class="choice-icon" aria-hidden="true">📉</span>
+              <span class="choice-label">Lose</span>
+            </button>
+            <button type="button" class="choice-card" data-group="edit-goal" data-value="maintain" role="radio" aria-checked="false">
+              <span class="choice-icon" aria-hidden="true">⚖️</span>
+              <span class="choice-label">Maintain</span>
+            </button>
+            <button type="button" class="choice-card" data-group="edit-goal" data-value="gain" role="radio" aria-checked="false">
+              <span class="choice-icon" aria-hidden="true">📈</span>
+              <span class="choice-label">Gain</span>
+            </button>
+          </div>
+        </div>
+        <button type="button" class="btn btn--primary btn--full" id="save-profile-btn">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════
+       CONFIRM DIALOG  (app.js)
+  ═══════════════════════════════════════════════ -->
+  <div id="confirm-dialog" class="dialog-overlay" role="alertdialog" aria-modal="true"
+    aria-labelledby="confirm-title" aria-describedby="confirm-message" hidden>
+    <div class="dialog-box">
+      <h3 class="dialog-title" id="confirm-title">Confirm</h3>
+      <p class="dialog-message" id="confirm-message">Are you sure?</p>
+      <div class="dialog-actions">
+        <button type="button" class="btn btn--secondary" id="confirm-cancel-btn">Cancel</button>
+        <button type="button" class="btn btn--danger" id="confirm-ok-btn">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════
+       TOAST CONTAINER  (app.js)
+  ═══════════════════════════════════════════════ -->
+  <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="false"></div>
+
+
+  <!-- JS modules — generated separately, order matters -->
+  <script src="js/storage.js"></script>
+  <script src="js/onboarding.js"></script>
+  <script src="js/camera.js"></script>
+  <script src="js/meals.js"></script>
+  <script src="js/stats.js"></script>
+  <script src="js/profile.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
