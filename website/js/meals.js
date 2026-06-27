@@ -26,8 +26,15 @@ const Meals = (() => {
     });
   };
 
-  const catEmoji = (cat) =>
-    ({ breakfast:'🌅', lunch:'☀️', dinner:'🌙', snack:'🍎' })[cat] ?? '🍽️';
+  const CAT_ICONS = {
+    breakfast: 'sunrise',
+    lunch:     'sun',
+    dinner:    'moon',
+    snack:     'apple',
+  };
+
+  const catIcon = (cat) =>
+    `<i data-lucide="${CAT_ICONS[cat] || 'utensils'}" aria-hidden="true"></i>`;
 
   /* ── XSS guard ───────────────────────────────────────── */
 
@@ -46,7 +53,7 @@ const Meals = (() => {
 
     const thumbHtml = meal.imageData
       ? `<img class="meal-preview-thumb" src="${meal.imageData}" alt="${esc(meal.name)}" loading="lazy">`
-      : `<div class="meal-preview-thumb" aria-hidden="true">${catEmoji(meal.category)}</div>`;
+      : `<div class="meal-preview-thumb" aria-hidden="true">${catIcon(meal.category)}</div>`;
 
     card.innerHTML = `
       ${thumbHtml}
@@ -85,6 +92,7 @@ const Meals = (() => {
     }
 
     updateHomeStats(meals);
+    if (typeof lucide !== 'undefined') lucide.createIcons();
   };
 
   const updateHomeStats = (meals) => {
@@ -178,6 +186,8 @@ const Meals = (() => {
         dayMeals.forEach(m => group.appendChild(makeMealCard(m)));
         list.appendChild(group);
       });
+
+    if (typeof lucide !== 'undefined') lucide.createIcons();
   };
 
   /* ══════════════════════════════════════════════════════
@@ -258,7 +268,7 @@ const Meals = (() => {
 
     if (activeMealId) {
       Storage.updateMeal(activeMealId, { name, calories, protein, carbs, fat, category, imageData });
-      App.showToast('Meal updated ✓', 'success');
+      App.showToast('Meal updated', 'success');
     } else {
       const now  = new Date().toISOString();
       Storage.addMeal({
@@ -268,7 +278,7 @@ const Meals = (() => {
         timestamp: now,
         date:      now.slice(0, 10),
       });
-      App.showToast('Meal saved! 🎉', 'success');
+      App.showToast('Meal saved!', 'success');
     }
 
     closeEntryModal();

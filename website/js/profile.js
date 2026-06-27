@@ -143,7 +143,7 @@ const Profile = (() => {
     closeEditModal();
     render();
     Meals.renderHomePreview(); // goals changed → refresh ring/bars
-    App.showToast('Profile updated ✓', 'success');
+    App.showToast('Profile updated', 'success');
   };
 
   /* ── Dark mode ───────────────────────────────────────── */
@@ -183,7 +183,7 @@ const Profile = (() => {
       a.click();
       a.remove();
       URL.revokeObjectURL(url);
-      App.showToast('Data exported ✓', 'success');
+      App.showToast('Data exported', 'success');
     });
 
     // ── Import
@@ -202,7 +202,7 @@ const Profile = (() => {
           render();
           Meals.renderHomePreview();
           Meals.renderHistory();
-          App.showToast('Data imported ✓', 'success');
+          App.showToast('Data imported', 'success');
         } catch {
           App.showToast('Invalid backup file', 'error');
         }

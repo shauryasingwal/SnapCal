@@ -296,9 +296,17 @@ body.dark-mode .choice-card.selected {
 }
 
 .choice-icon {
-  font-size: 22px;
+  width: 20px;
+  height: 20px;
+  stroke: var(--color-text-muted);
+  stroke-width: 2;
+  fill: none;
   flex-shrink: 0;
-  line-height: 1;
+}
+
+.choice-card[aria-checked="true"] .choice-icon,
+.choice-card.selected .choice-icon {
+  stroke: var(--color-primary);
 }
 
 .choice-label {
@@ -345,7 +353,19 @@ body.dark-mode .choice-card.selected {
   color: var(--color-text-muted);
   transition: all var(--dur-fast);
   cursor: pointer;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.cat-icon {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  flex-shrink: 0;
 }
 
 .cat-btn[aria-checked="true"],
@@ -681,14 +701,27 @@ body.dark-mode .progress-track {
 }
 
 .ob-icon {
-  font-size: 64px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 28px;
   animation: obFloat 2.8s ease-in-out infinite;
 }
 
+.ob-icon svg {
+  width: 56px;
+  height: 56px;
+  stroke: var(--color-primary);
+  stroke-width: 1.5;
+  fill: none;
+}
+
 .ob-icon--celebrate {
   animation: obCelebrate 0.55s var(--ease-out) forwards;
+}
+
+.ob-icon--celebrate svg {
+  stroke: var(--color-primary);
 }
 
 @keyframes obFloat {
@@ -1053,10 +1086,17 @@ body.dark-mode .ring-track {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 26px;
   flex-shrink: 0;
   overflow: hidden;
   object-fit: cover;
+}
+
+.meal-preview-thumb svg {
+  width: 24px;
+  height: 24px;
+  stroke: rgba(255, 255, 255, 0.9);
+  stroke-width: 2;
+  fill: none;
 }
 
 .meal-preview-thumb img {
@@ -1108,9 +1148,14 @@ body.dark-mode .ring-track {
 }
 
 .empty-state-icon {
-  font-size: 52px;
+  width: 52px;
+  height: 52px;
+  stroke: var(--color-primary);
+  stroke-width: 1.5;
+  fill: none;
+  opacity: 0.65;
   margin-bottom: 16px;
-  line-height: 1;
+  display: block;
 }
 
 .empty-state-title {
@@ -1303,7 +1348,14 @@ body.dark-mode .ring-track {
   gap: 18px;
 }
 
-.streak-icon { font-size: 38px; flex-shrink: 0; }
+.streak-icon {
+  width: 36px;
+  height: 36px;
+  stroke: #FFFFFF;
+  stroke-width: 1.75;
+  fill: none;
+  flex-shrink: 0;
+}
 .streak-title { font-size: var(--text-xl); font-weight: 800; }
 .streak-desc  { font-size: var(--text-sm); opacity: 0.85; margin-top: 3px; }
 
@@ -1352,7 +1404,13 @@ body.dark-mode .ring-track {
   box-shadow: var(--shadow-sm);
 }
 
-.metric-icon  { font-size: 20px; }
+.metric-icon {
+  width: 20px;
+  height: 20px;
+  stroke: var(--color-primary);
+  stroke-width: 2;
+  fill: none;
+}
 .metric-value { font-size: var(--text-lg); font-weight: 700; }
 .metric-label { font-size: var(--text-xs); color: var(--color-text-muted); font-weight: 500; }
 
@@ -1395,7 +1453,14 @@ body.dark-mode .ring-track {
   margin-right: 12px;
 }
 
-.setting-icon { font-size: 20px; width: 24px; text-align: center; flex-shrink: 0; }
+.setting-icon {
+  width: 20px;
+  height: 20px;
+  stroke: var(--color-text-muted);
+  stroke-width: 2;
+  fill: none;
+  flex-shrink: 0;
+}
 
 .setting-name {
   font-size: var(--text-md);
@@ -1472,17 +1537,20 @@ body.dark-mode .ring-track {
 }
 
 .nav-icon {
-  font-size: 22px;
-  line-height: 1;
-  filter: grayscale(1) opacity(0.5);
-  transition: filter var(--dur-fast), transform var(--dur-fast);
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.45;
+  transition: opacity var(--dur-fast), transform var(--dur-fast);
 }
-
-body.dark-mode .nav-icon { filter: grayscale(1) opacity(0.35); }
 
 .nav-item--active .nav-icon,
 .nav-item[aria-selected="true"] .nav-icon {
-  filter: grayscale(0) opacity(1);
+  opacity: 1;
   transform: scale(1.06);
 }
 
@@ -1778,7 +1846,13 @@ body.dark-mode .nav-icon { filter: grayscale(1) opacity(0.35); }
   color: rgba(255,255,255,0.75);
 }
 
-.image-placeholder-icon { font-size: 30px; }
+.image-placeholder-icon {
+  width: 32px;
+  height: 32px;
+  stroke: rgba(255, 255, 255, 0.8);
+  stroke-width: 1.75;
+  fill: none;
+}
 .image-placeholder-text { font-size: var(--text-sm); font-weight: 500; }
 
 /* Meal detail image (top of sheet) */
@@ -1802,7 +1876,15 @@ body.dark-mode .nav-icon { filter: grayscale(1) opacity(0.35); }
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 56px;
+}
+
+.detail-image-placeholder svg {
+  width: 52px;
+  height: 52px;
+  stroke: var(--color-text-muted);
+  stroke-width: 1.5;
+  fill: none;
+  opacity: 0.5;
 }
 
 /* Detail modal body styles */
@@ -2012,4 +2094,24 @@ body.dark-mode .nav-icon { filter: grayscale(1) opacity(0.35); }
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   31. SHAKE ANIMATION  (form validation feedback — onboarding.js)
+───────────────────────────────────────────────────────────── */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-7px); }
+  40%       { transform: translateX(7px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   32. SCREEN TRANSITION  (used by app.js switchScreen)
+───────────────────────────────────────────────────────────── */
+@keyframes screenIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }

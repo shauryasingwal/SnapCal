@@ -187,6 +187,9 @@ document.addEventListener('DOMContentLoaded', () => {
     Onboarding.init();
   }
 
+  // Render all static Lucide icons present in the DOM
+  if (typeof lucide !== 'undefined') lucide.createIcons();
+
   // Register PWA service worker
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker
