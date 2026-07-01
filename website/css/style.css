@@ -1405,11 +1405,15 @@ body.dark-mode .ring-track {
 }
 
 .metric-icon {
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
   stroke: var(--color-primary);
-  stroke-width: 2;
+  stroke-width: 1.75;
   fill: none;
+  display: block;
+  flex-shrink: 0;
 }
 .metric-value { font-size: var(--text-lg); font-weight: 700; }
 .metric-label { font-size: var(--text-xs); color: var(--color-text-muted); font-weight: 500; }
