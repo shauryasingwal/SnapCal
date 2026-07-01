@@ -2115,3 +2115,26 @@ body.dark-mode .ring-track {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+
+/* ─────────────────────────────────────────────────────────────
+   33. INLINE SVG ICON HELPERS  (icons.js / index.html)
+───────────────────────────────────────────────────────────── */
+
+/* Large onboarding step icons */
+.ob-icon-svg {
+  width: 56px;
+  height: 56px;
+  stroke: var(--color-primary);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+/* Meal preview card category icon (inside thumb placeholder) */
+.meal-cat-icon {
+  width: 24px;
+  height: 24px;
+  stroke: rgba(255, 255, 255, 0.9);
+  stroke-width: 2;
+  fill: none;
+}

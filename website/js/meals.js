@@ -34,7 +34,7 @@ const Meals = (() => {
   };
 
   const catIcon = (cat) =>
-    `<i data-lucide="${CAT_ICONS[cat] || 'utensils'}" aria-hidden="true"></i>`;
+    Icons.svg(CAT_ICONS[cat] || 'utensils', 'meal-cat-icon');
 
   /* ── XSS guard ───────────────────────────────────────── */
 
@@ -92,7 +92,6 @@ const Meals = (() => {
     }
 
     updateHomeStats(meals);
-    if (typeof lucide !== 'undefined') lucide.createIcons();
   };
 
   const updateHomeStats = (meals) => {
@@ -187,7 +186,6 @@ const Meals = (() => {
         list.appendChild(group);
       });
 
-    if (typeof lucide !== 'undefined') lucide.createIcons();
   };
 
   /* ══════════════════════════════════════════════════════
